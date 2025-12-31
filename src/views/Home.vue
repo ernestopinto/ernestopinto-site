@@ -28,19 +28,19 @@ onUnmounted(() => {
 
 <template>
   <div class="p-8">
-    <h1 class="text-3xl font-bold">Home</h1>
-    <p class="mt-2 opacity-70">Welcome to ernestopinto.pt</p>
+    <h1 class="text-3xl font-bold">{{ $t('home.title') }}</h1>
+    <p class="mt-2 opacity-70">{{ $t('home.welcome') }}</p>
 
     <div class="mt-6">
-      <h2 class="text-xl font-semibold mb-2">Luna Blog API Data:</h2>
+      <h2 class="text-xl font-semibold mb-2">{{ $t('home.api_data') }}</h2>
       <div v-if="blogData" class="bg-gray-100 p-4 rounded-md overflow-auto max-h-96">
         <pre class="text-xs text-gray-800">{{ JSON.stringify(blogData, null, 2) }}</pre>
       </div>
       <div v-else-if="error" class="text-red-500">
-        {{ error }}
+        {{ $t('home.error') }}
       </div>
       <div v-else class="text-gray-500 italic">
-        Loading blog data...
+        {{ $t('home.loading') }}
       </div>
     </div>
   </div>

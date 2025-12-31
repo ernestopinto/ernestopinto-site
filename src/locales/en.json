@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "Home",
+    "welcome": "Welcome to ernestopinto.pt",
+    "api_data": "Luna Blog API Data:",
+    "loading": "Loading blog data...",
+    "error": "Failed to load blog data."
+  },
+  "contacts": {
+    "title": "Contacts",
+    "subtitle": "Contact page (deep link test)"
+  },
+  "nav": {
+    "home": "Home",
+    "contacts": "Contacts"
+  }
+}
