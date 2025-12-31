@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import Footer from './components/Footer.vue'
 
 const { locale } = useI18n()
 
@@ -29,6 +30,7 @@ const toggleLanguage = () => {
     </nav>
 
     <RouterView />
+    <Footer />
   </div>
 </template>
 

@@ -4,7 +4,8 @@
     "welcome": "Welcome to ernestopinto.pt",
     "api_data": "Luna Blog API Data:",
     "loading": "Loading blog data...",
-    "error": "Failed to load blog data."
+    "error": "Failed to load blog data.",
+    "all_themes": "All"
   },
   "contacts": {
     "title": "Contacts",
@@ -13,5 +14,12 @@
   "nav": {
     "home": "Home",
     "contacts": "Contacts"
+  },
+  "common": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "footer": {
+    "copyright": "Ernesto Pinto and Arcadeluz 2026"
   }
 }
