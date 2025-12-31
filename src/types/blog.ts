@@ -40,3 +40,31 @@ export interface BlogApiResponse {
     message: string;
     data: PaginatedBlogData;
 }
+
+/**
+ * Root response from the /luna/blog/{id} endpoint
+ */
+export interface SingleBlogPostResponse {
+    error: number; // 0 for success
+    message: string;
+    data: SingleBlogPostDTO;
+}
+
+/**
+ * Single Blog Post DTO
+ * Contains all BlogPost model fields EXCEPT the 'id'
+ */
+export interface SingleBlogPostDTO {
+    title: string;
+    slug: string;
+    theme: 'Arcadeluz' | 'World' | 'Gaming';
+    location: string | null;
+    header_image: string | null;
+    body: string; // HTML content
+    status: 'published' | 'draft';
+    published_at: string; // ISO Date string (e.g., "2023-10-27T10:00:00.000000Z")
+    created_at: string;
+    updated_at: string;
+    folder_image_banner: string[]; // Casted from JSON in the database
+    folder_link: string[];         // Casted from JSON in the database
+}

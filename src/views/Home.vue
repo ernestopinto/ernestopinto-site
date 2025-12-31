@@ -138,12 +138,14 @@ const getPreviewText = (html: string) => {
       <div v-else>
         <!-- Blog Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <article 
+          <RouterLink 
             v-for="post in blogPosts" 
             :key="post.id" 
-            class="group bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2"
+            :to="'/blog/' + post.id"
+            class="group bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2 block"
           >
-            <div class="aspect-video overflow-hidden">
+            <article>
+              <div class="aspect-video overflow-hidden">
               <img 
                 v-if="post.header_image"
                 :src="post.header_image" 
@@ -174,7 +176,8 @@ const getPreviewText = (html: string) => {
               </div>
             </div>
           </article>
-        </div>
+        </RouterLink>
+      </div>
 
         <!-- Pagination -->
         <div v-if="totalPages > 1" class="flex justify-center mt-12 gap-2">
