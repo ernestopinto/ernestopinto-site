@@ -3,11 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { lunaService } from '../services/luna.service';
 import type { Subscription } from 'rxjs';
+import type { SingleBlogPostDTO } from '../types/blog';
 
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id as string;
-const blogPost = ref<any>(null);
+const blogPost = ref<SingleBlogPostDTO | null>(null);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
 let subscription: Subscription;
@@ -58,13 +59,67 @@ onUnmounted(() => {
     </div>
 
     <div v-else-if="blogPost">
-      <h1 class="text-3xl font-bold mb-8">Single Blog Post (ID: {{ id }})</h1>
-      <pre class="bg-gray-100 p-6 rounded-lg overflow-auto max-h-[70vh]">{{ JSON.stringify(blogPost, null, 2) }}</pre>
-      <div class="mt-8">
-        <button @click="goBack" class="text-blue-600 hover:underline cursor-pointer">
-          {{ $t('common.back_to_listing') }}
-        </button>
-      </div>
+      <article class="max-w-4xl mx-auto">
+        <!-- Header Image -->
+        <div v-if="blogPost.header_image" class="w-full aspect-video rounded-2xl overflow-hidden mb-8 shadow-xl">
+          <img :src="blogPost.header_image" :alt="blogPost.title" class="w-full h-full object-cover" />
+        </div>
+
+        <!-- Meta Information -->
+        <div class="flex items-center gap-4 mb-4">
+          <span class="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+            {{ $t(`home.themes.${blogPost.theme}`) }}
+          </span>
+          <span v-if="blogPost.location" class="text-sm text-gray-500 flex items-center">
+            <span class="mr-1">📍</span> {{ blogPost.location }}
+          </span>
+          <span class="text-sm text-gray-500">
+            {{ new Date(blogPost.published_at).toLocaleDateString() }}
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl font-bold mb-8 text-gray-900 leading-tight">
+          {{ blogPost.title }}
+        </h1>
+
+        <!-- Body Content -->
+        <div class="prose prose-lg max-w-none text-gray-800 mb-12 leading-relaxed" v-html="blogPost.body"></div>
+
+        <!-- Banner Section -->
+        <div v-if="blogPost.folder_image_banner && blogPost.folder_image_banner.length > 0" 
+             class="mt-12 pt-8 border-t border-gray-100">
+          
+          <h3 class="text-lg font-semibold text-left mb-6 text-gray-800">
+            {{ $t('blog.discover_more') }}
+          </h3>
+          
+          <div class="flex flex-col items-center">
+            <template v-for="(banner, index) in blogPost.folder_image_banner" :key="index">
+              <!-- Wrap banner in link if a corresponding link exists -->
+              <a v-if="blogPost.folder_link && blogPost.folder_link[index]" 
+                 :href="blogPost.folder_link[index]" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="block rounded-xl overflow-hidden shadow-md mb-4 max-w-sm hover:opacity-90 transition-opacity"
+              >
+                <img :src="banner" alt="Banner" class="w-full h-auto" />
+              </a>
+              <!-- Otherwise just show the image -->
+              <div v-else class="rounded-xl overflow-hidden shadow-md mb-4 max-w-sm">
+                <img :src="banner" alt="Banner" class="w-full h-auto" />
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Footer / Back Button -->
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <button @click="goBack" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 transition-colors cursor-pointer">
+            <span class="mr-2">←</span> {{ $t('common.back_to_listing') }}
+          </button>
+        </div>
+      </article>
     </div>
   </div>
 </template>
