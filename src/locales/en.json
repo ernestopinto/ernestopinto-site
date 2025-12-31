@@ -5,7 +5,12 @@
     "api_data": "Luna Blog API Data:",
     "loading": "Loading blog data...",
     "error": "Failed to load blog data.",
-    "all_themes": "All"
+    "all_themes": "All",
+    "themes": {
+      "World": "World",
+      "Arcadeluz": "Arcadeluz",
+      "Gaming": "Gaming"
+    }
   },
   "contacts": {
     "title": "Contacts",

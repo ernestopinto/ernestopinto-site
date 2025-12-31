@@ -1,29 +1,23 @@
 /**
- * Individual Blog Post DTO
+ * Transformed Individual Blog Post DTO
+ * (Excludes: id, status, folder_image_banner, folder_link, updated_at, created_at)
  */
 export interface BlogPostDTO {
-    id: number;
     title: string;
     slug: string;
     theme: 'Arcadeluz' | 'World' | 'Gaming';
     location: string | null;
     header_image: string | null;
     body: string; // HTML content
-    status: 'published' | 'draft';
-    published_at: string; // ISO Date string
-    created_at: string;
-    updated_at: string;
-    // JSON casted arrays
-    folder_image_banner: string[]; 
-    folder_link: string[];
+    published_at: string; // ISO Date string (e.g., "2023-10-27T10:00:00.000000Z")
 }
 
 /**
- * Laravel Pagination object
+ * Laravel Pagination object containing the transformed data
  */
 export interface PaginatedBlogData {
     current_page: number;
-    data: BlogPostDTO[]; // The actual array of posts
+    data: BlogPostDTO[]; // The filtered array of posts
     first_page_url: string;
     from: number;
     last_page: number;
