@@ -94,19 +94,19 @@ onUnmounted(() => {
             {{ $t('blog.discover_more') }}
           </h3>
           
-          <div class="flex flex-col items-center">
+          <div class="flex flex-wrap justify-center gap-6">
             <template v-for="(banner, index) in blogPost.folder_image_banner" :key="index">
               <!-- Wrap banner in link if a corresponding link exists -->
               <a v-if="blogPost.folder_link && blogPost.folder_link[index]" 
                  :href="blogPost.folder_link[index]" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 class="block rounded-xl overflow-hidden shadow-md mb-4 max-w-sm hover:opacity-90 transition-opacity"
+                 class="block rounded-xl overflow-hidden shadow-md max-w-sm hover:opacity-90 transition-opacity"
               >
                 <img :src="banner" alt="Banner" class="w-full h-auto" />
               </a>
               <!-- Otherwise just show the image -->
-              <div v-else class="rounded-xl overflow-hidden shadow-md mb-4 max-w-sm">
+              <div v-else class="rounded-xl overflow-hidden shadow-md max-w-sm">
                 <img :src="banner" alt="Banner" class="w-full h-auto" />
               </div>
             </template>
