@@ -101,13 +101,13 @@ onUnmounted(() => {
                  :href="blogPost.folder_link[index]" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 class="block rounded-xl overflow-hidden shadow-md max-w-sm hover:opacity-90 transition-opacity"
+                 class="block rounded-xl overflow-hidden shadow-md max-w-sm hover:opacity-90 transition-opacity flex"
               >
-                <img :src="banner" alt="Banner" class="w-full h-auto" />
+                <img :src="banner" alt="Banner" class="w-full h-full object-cover" />
               </a>
               <!-- Otherwise just show the image -->
-              <div v-else class="rounded-xl overflow-hidden shadow-md max-w-sm">
-                <img :src="banner" alt="Banner" class="w-full h-auto" />
+              <div v-else class="rounded-xl overflow-hidden shadow-md max-w-sm flex">
+                <img :src="banner" alt="Banner" class="w-full h-full object-cover" />
               </div>
             </template>
           </div>
