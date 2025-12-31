@@ -1,8 +1,9 @@
 /**
  * Transformed Individual Blog Post DTO
- * (Excludes: id, status, folder_image_banner, folder_link, updated_at, created_at)
+ * (Excludes: status, folder_image_banner, folder_link, updated_at, created_at)
  */
 export interface BlogPostDTO {
+    id: number;
     title: string;
     slug: string;
     theme: 'Arcadeluz' | 'World' | 'Gaming';
