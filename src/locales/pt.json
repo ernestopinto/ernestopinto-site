@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "Início",
+    "welcome": "Bem-vindo a ernestopinto.pt",
+    "api_data": "Dados da API Luna Blog:",
+    "loading": "A carregar dados do blog...",
+    "error": "Falha ao carregar dados do blog."
+  },
+  "contacts": {
+    "title": "Contactos",
+    "subtitle": "Página de contactos (teste de link profundo)"
+  },
+  "nav": {
+    "home": "Início",
+    "contacts": "Contactos"
+  }
+}
