@@ -25,6 +25,10 @@
     "next": "Next",
     "back_to_listing": "Back to blog listing"
   },
+  "blog": {
+    "view_folder": "View Folder",
+    "discover_more": "Discover more:"
+  },
   "footer": {
     "copyright": "Ernesto Pinto and Arcadeluz 2026"
   }

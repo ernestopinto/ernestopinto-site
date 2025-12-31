@@ -25,6 +25,10 @@
     "next": "Próximo",
     "back_to_listing": "Voltar para a lista de posts"
   },
+  "blog": {
+    "view_folder": "Ver Pasta",
+    "discover_more": "Descubra mais:"
+  },
   "footer": {
     "copyright": "Ernesto Pinto e Arcadeluz 2026"
   }
