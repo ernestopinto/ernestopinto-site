@@ -140,7 +140,7 @@ const getPreviewText = (html: string) => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <article 
             v-for="post in blogPosts" 
-            :key="post.slug" 
+            :key="post.id" 
             class="group bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2"
           >
             <div class="aspect-video overflow-hidden">
