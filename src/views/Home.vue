@@ -29,6 +29,18 @@ const fetchPosts = (page: number = 1, theme: string | null = null) => {
         blogPosts.value = response.data.data;
         totalPages.value = response.data.last_page;
         currentPage.value = response.data.current_page;
+        
+        // Check for saved post ID and scroll after DOM update
+        const savedPostId = sessionStorage.getItem('lastClickedPostId');
+        if (savedPostId) {
+          setTimeout(() => {
+            const element = document.getElementById(`post-${savedPostId}`);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              sessionStorage.removeItem('lastClickedPostId');
+            }
+          }, 100);
+        }
       } else {
         error.value = response.message || 'Failed to load blog data.';
       }
@@ -43,6 +55,13 @@ const fetchPosts = (page: number = 1, theme: string | null = null) => {
 };
 
 onMounted(() => {
+  // Restore page and theme if available to help finding the anchor
+  const savedPage = sessionStorage.getItem('blogCurrentPage');
+  const savedTheme = sessionStorage.getItem('blogSelectedTheme');
+  
+  if (savedPage) currentPage.value = parseInt(savedPage);
+  if (savedTheme !== null) selectedTheme.value = savedTheme === 'null' ? null : savedTheme;
+
   fetchPosts(currentPage.value, selectedTheme.value);
 });
 
@@ -51,6 +70,12 @@ onUnmounted(() => {
     subscription.unsubscribe();
   }
 });
+
+const saveScrollPosition = (postId: number) => {
+  sessionStorage.setItem('lastClickedPostId', postId.toString());
+  sessionStorage.setItem('blogCurrentPage', currentPage.value.toString());
+  sessionStorage.setItem('blogSelectedTheme', selectedTheme.value === null ? 'null' : selectedTheme.value);
+};
 
 const scrollToBlog = () => {
   if (blogSection.value) {
@@ -141,7 +166,9 @@ const getPreviewText = (html: string) => {
           <RouterLink 
             v-for="post in blogPosts" 
             :key="post.id" 
+            :id="'post-' + post.id"
             :to="'/blog/' + post.id"
+            @click="saveScrollPosition(post.id)"
             class="group bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2 block"
           >
             <article>
