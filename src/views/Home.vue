@@ -10,7 +10,7 @@ const totalPages = ref(1);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
 const selectedTheme = ref<string | null>(null);
-const themes = ['Arcadeluz', 'World', 'Gaming'] as const;
+const themes = ['World', 'Arcadeluz', 'Gaming'] as const;
 
 let subscription: Subscription;
 
@@ -92,7 +92,7 @@ const getPreviewText = (html: string) => {
       >
         <div class="absolute inset-0 bg-black/40"></div>
       </div>
-      <h1 class="relative text-6xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl">
+      <h1 class="relative text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl px-4 text-center">
         ernestopinto.net
       </h1>
     </header>
@@ -123,7 +123,7 @@ const getPreviewText = (html: string) => {
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           ]"
         >
-          {{ theme }}
+          {{ $t(`home.themes.${theme}`) }}
         </button>
       </div>
 
@@ -140,7 +140,7 @@ const getPreviewText = (html: string) => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <article 
             v-for="post in blogPosts" 
-            :key="post.id" 
+            :key="post.slug" 
             class="group bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2"
           >
             <div class="aspect-video overflow-hidden">
@@ -157,7 +157,7 @@ const getPreviewText = (html: string) => {
             <div class="p-6">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                  {{ post.theme }}
+                  {{ $t(`home.themes.${post.theme}`) }}
                 </span>
                 <span class="text-xs text-gray-500 flex items-center">
                   <span class="mr-1">📍</span> {{ post.location }}
@@ -170,7 +170,7 @@ const getPreviewText = (html: string) => {
                 {{ getPreviewText(post.body) }}
               </p>
               <div class="flex items-center text-sm text-gray-500 mt-4">
-                <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
+                <span>{{ new Date(post.published_at).toLocaleDateString() }}</span>
               </div>
             </div>
           </article>
