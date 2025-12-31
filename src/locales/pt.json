@@ -22,7 +22,8 @@
   },
   "common": {
     "previous": "Anterior",
-    "next": "Próximo"
+    "next": "Próximo",
+    "back_to_listing": "Voltar para a lista de posts"
   },
   "footer": {
     "copyright": "Ernesto Pinto e Arcadeluz 2026"

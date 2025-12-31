@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import type { SingleBlogPostResponse } from '../types/blog';
 
 class LunaService {
   private axiosInstance = axios.create({
@@ -14,6 +15,10 @@ class LunaService {
     return from(this.axiosInstance.get<T>(url, config)).pipe(
       map((response: AxiosResponse<T>) => response.data)
     );
+  }
+
+  getPostById(id: number | string): Observable<SingleBlogPostResponse> {
+    return this.get<SingleBlogPostResponse>(`/blog/${id}`);
   }
 
   post<T>(url: string, data?: any, config?: AxiosRequestConfig): Observable<T> {
