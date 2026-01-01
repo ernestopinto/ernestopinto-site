@@ -22,6 +22,14 @@ export const router = createRouter({
             component: BlogPost,
         },
     ],
+    scrollBehavior(...args) {
+        const savedPosition = args[2]
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { top: 0 }
+        }
+    },
 })
 
 export default router
