@@ -22,7 +22,8 @@ export const router = createRouter({
             component: BlogPost,
         },
     ],
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(...args) {
+        const savedPosition = args[2]
         if (savedPosition) {
             return savedPosition
         } else {
