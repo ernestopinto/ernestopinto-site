@@ -6,7 +6,6 @@ import {
   ExternalLink,
   Rocket,
   Wrench,
-  Archive,
   Star,
   GitFork,
   Clock,

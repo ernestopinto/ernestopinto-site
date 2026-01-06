@@ -5,7 +5,7 @@ import { lunaService } from '../services/luna.service';
 import type { Subscription } from 'rxjs';
 import type { SingleBlogPostDTO } from '../types/blog';
 import { computed } from 'vue';
-import { Share2, Facebook } from 'lucide-vue-next';
+import { Facebook } from 'lucide-vue-next';
 
 
 const route = useRoute();
