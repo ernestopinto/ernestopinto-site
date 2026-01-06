@@ -4,6 +4,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { lunaService } from '../services/luna.service';
 import type { Subscription } from 'rxjs';
 import type { SingleBlogPostDTO } from '../types/blog';
+import { computed } from 'vue';
+import { Share2, Facebook } from 'lucide-vue-next';
+
 
 const route = useRoute();
 const router = useRouter();
@@ -15,6 +18,16 @@ let subscription: Subscription;
 
 const goBack = () => {
   router.back();
+};
+
+const shareUrl = computed(() => {
+  const baseUrl = window.location.origin;
+  return encodeURIComponent(`${baseUrl}${route.fullPath}`);
+});
+
+const shareOnFacebook = () => {
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl.value}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
 };
 
 onMounted(() => {
@@ -121,5 +134,25 @@ onUnmounted(() => {
         </div>
       </article>
     </div>
+    <button
+        @click="shareOnFacebook"
+        class="fixed bottom-[20px] right-6 z-50
+         flex items-center justify-center gap-2
+         bg-blue-600 text-white
+         w-12 h-12 sm:w-auto sm:h-auto
+         sm:px-4 sm:py-3
+         rounded-full shadow-lg
+         hover:bg-blue-700 transition-all
+         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        aria-label="Share on Facebook"
+    >
+      <Facebook class="w-5 h-5" />
+      <span class="hidden sm:inline text-sm font-medium">
+        {{ $t('blog.share') }}
+      </span>
+    </button>
+
+
+
   </div>
 </template>
