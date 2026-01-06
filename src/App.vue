@@ -16,6 +16,9 @@ const toggleLanguage = () => {
         <RouterLink to="/" class="font-medium hover:underline">
           {{ $t('nav.home') }}
         </RouterLink>
+        <RouterLink to="/projects" class="font-medium hover:underline">
+          {{ $t('nav.projects') }}
+        </RouterLink>
         <RouterLink to="/contacts" class="font-medium hover:underline">
           {{ $t('nav.contacts') }}
         </RouterLink>

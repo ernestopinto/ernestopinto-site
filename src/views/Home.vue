@@ -25,26 +25,29 @@ const fetchPosts = (page: number = 1, theme: string | null = null) => {
   
   subscription = lunaService.get<BlogApiResponse>(url).subscribe({
     next: (response) => {
-      if (response.error === 0 && response.data) {
-        blogPosts.value = response.data.data;
-        totalPages.value = response.data.last_page;
-        currentPage.value = response.data.current_page;
-        
+      if (response.error === 0) {
+        const payload = response.data
+
+        blogPosts.value = payload.data
+        totalPages.value = payload.last_page
+        currentPage.value = payload.current_page
+
         // Check for saved post ID and scroll after DOM update
-        const savedPostId = sessionStorage.getItem('lastClickedPostId');
+        const savedPostId = sessionStorage.getItem('lastClickedPostId')
         if (savedPostId) {
           setTimeout(() => {
-            const element = document.getElementById(`post-${savedPostId}`);
+            const element = document.getElementById(`post-${savedPostId}`)
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              sessionStorage.removeItem('lastClickedPostId');
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              sessionStorage.removeItem('lastClickedPostId')
             }
-          }, 100);
+          }, 100)
         }
       } else {
-        error.value = response.message || 'Failed to load blog data.';
+        error.value = response.message || 'Failed to load blog data.'
       }
-      isLoading.value = false;
+
+      isLoading.value = false
     },
     error: (err) => {
       console.error('Error fetching blog data:', err);

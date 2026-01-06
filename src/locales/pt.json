@@ -14,11 +14,16 @@
   },
   "contacts": {
     "title": "Contactos",
-    "subtitle": "Página de contactos (teste de link profundo)"
+    "subtitle": "Página de contactos"
+  },
+  "projects": {
+    "title": "Projectos",
+    "subtitle": "Página Projectos"
   },
   "nav": {
     "home": "Início",
-    "contacts": "Contactos"
+    "contacts": "Contactos",
+    "projects": "Projectos"
   },
   "common": {
     "previous": "Anterior",
@@ -27,7 +32,8 @@
   },
   "blog": {
     "view_folder": "Ver Pasta",
-    "discover_more": "Descubra mais:"
+    "discover_more": "Descubra mais:",
+    "share": "Partilhar no Facebook"
   },
   "footer": {
     "copyright": "Ernesto Pinto e Arcadeluz 2026"
