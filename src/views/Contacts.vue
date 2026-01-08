@@ -4,7 +4,6 @@ import type {Subscription} from 'rxjs'
 import {lunaService} from '../services/luna.service'
 import {useI18n} from "vue-i18n";
 
-type ContactPayload = { message: string }
 type ContactResponse = unknown
 
 const {t} = useI18n()
