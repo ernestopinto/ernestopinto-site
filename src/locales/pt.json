@@ -13,8 +13,21 @@
     }
   },
   "contacts": {
-    "title": "Contactos",
-    "subtitle": "Página de contactos"
+    "title": "Contacto",
+    "subtitle": "Página de contactos",
+    "subMessage": "Coloque-me questões, desafios, sugestões ou qualquer outra dúvida que tenha.",
+    "send": "Enviar mensagem",
+    "sending": "Enviando...",
+    "clear": "Limpar",
+    "message": "Mensagem",
+    "write": "Escreva a sua mensagem",
+    "validation": "Escreva a sua mensagem",
+    "validationMinLength": "Escreva pelo menos {min} caracteres",
+    "validationMaxLength": "Máximo de {max} caracteres",
+    "email": "Email",
+    "emailInvalid": "O email não é válido",
+    "emailPlaceholder": "Digite o seu email",
+    "sentOk": "Mensagem enviada com sucesso!"
   },
   "projects": {
     "title": "Projectos",

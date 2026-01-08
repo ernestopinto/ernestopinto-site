@@ -79,7 +79,7 @@ onUnmounted(() => subscription?.unsubscribe())
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-12">
+  <div class="max-w-7xl mx-auto px-4 py-10">
     <!-- Header -->
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
