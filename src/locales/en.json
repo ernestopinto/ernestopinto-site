@@ -13,8 +13,21 @@
     }
   },
   "contacts": {
-    "title": "Contacts",
-    "subtitle": "Contact page"
+    "title": "Contact",
+    "subtitle": "Contact page",
+    "subMessage": "Post me questions or just say hi!",
+    "send": "Send a message",
+    "sending": "Sending...",
+    "clear": "Clear",
+    "message": "Message",
+    "email": "Email",
+    "emailInvalid": "Email is invalid",
+    "emailPlaceholder": "Enter your email",
+    "write": "Write your message",
+    "validation": "Write a message first!",
+    "validationMinLength": "Write at least {min} characters",
+    "validationMaxLength": "Maximum of {max} characters",
+    "sentOk": "Message sent successfully!"
   },
   "projects": {
     "title": "Projects",
