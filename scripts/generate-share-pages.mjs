@@ -208,36 +208,32 @@ function unwrapPayload(apiResponse) {
 }
 
 async function fetchAllPostsFromListEndpoint() {
-    const found = new Map(); // id -> post
+    const found = new Map();
+    let page = 1;
 
-    for (const theme of THEMES) {
-        let page = 1;
+    // lets assume i never gonna right more than 200 posts
+    const MAX_PAGES = 200;
 
-        while (true) {
-            const qs = new URLSearchParams({ page: String(page) });
-            if (theme) qs.set("theme", theme);
+    while (page <= MAX_PAGES) {
+        const url = `${API_BASE.replace(/\/$/, "")}/blog?page=${page}`;
 
-            const url = `${API_BASE.replace(/\/$/, "")}/blog?${qs.toString()}`;
+        const response = await fetchJson(url);
+        const payload = unwrapPayload(response);
 
-            const response = await fetchJson(url);
-            const payload = unwrapPayload(response);
+        if (!payload?.data || payload.data.length === 0) break;
 
-            if (!payload?.data || !Array.isArray(payload.data) || payload.data.length === 0) {
-                break;
+        for (const raw of payload.data) {
+            const post = normalizePost(raw);
+            if (post.id && !found.has(post.id)) {
+                found.set(post.id, post);
             }
-
-            for (const raw of payload.data) {
-                const post = normalizePost(raw);
-                if (!post.id) continue;
-                if (!found.has(post.id)) found.set(post.id, post);
-            }
-
-            const current = Number(payload.current_page ?? page);
-            const last = Number(payload.last_page ?? current);
-
-            if (current >= last) break;
-            page++;
         }
+
+        const current = Number(payload.current_page ?? page);
+        const last = Number(payload.last_page ?? current);
+
+        if (current >= last) break;
+        page++;
     }
 
     return [...found.values()];
