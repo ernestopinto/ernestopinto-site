@@ -34,8 +34,8 @@ const goBack = () => {
 };
 
 const shareOnFacebook = () => {
-  const id = route.params.id; // Vue router
-  const shareUrl = `${window.location.origin}/share/${id}.html`;
+  const id = route.params.id;
+  const shareUrl = `${window.location.origin}/share/${id}`;
   window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
       "_blank",
