@@ -146,7 +146,7 @@ onUnmounted(() => subscription?.unsubscribe())
             Maintained
           </button>
 
-          <button
+          <!--<button
               @click="filter = 'experiment'"
               class="px-3 py-1.5 rounded-full border text-sm font-medium
                    transition cursor-pointer
@@ -157,7 +157,7 @@ onUnmounted(() => subscription?.unsubscribe())
               : 'border-gray-200 text-gray-700'"
           >
             Experiments
-          </button>
+          </button>-->
 
           <button
               @click="filter = 'archived'"

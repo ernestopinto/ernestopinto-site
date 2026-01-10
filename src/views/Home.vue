@@ -114,12 +114,16 @@ const getPreviewText = (html: string) => {
   <div class="flex flex-col min-h-screen">
     <!-- Parallax Header -->
     <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-      <div 
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-        style="background-image: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop');"
+      <div
+          class="absolute inset-0 bg-cover bg-no-repeat bg-fixed"
+          style="
+            background-image: url('https://ik.imagekit.io/v5b1vx0mg/IMG_4801-2.jpg');
+            background-position: center 60%;
+          "
       >
         <div class="absolute inset-0 bg-black/40"></div>
       </div>
+
       <h1 class="relative text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl px-4 text-center">
         ernestopinto.net
       </h1>
