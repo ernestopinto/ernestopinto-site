@@ -13,21 +13,14 @@ const toggleLanguage = () => {
 
 <template>
   <Teleport to="head">
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ meta.title }}</title>
 
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="ernestopinto.net" />
     <meta property="og:title" :content="meta.ogTitle" />
     <meta property="og:description" :content="meta.ogDescription" />
     <meta property="og:image" :content="meta.ogImage" />
     <meta property="og:url" :content="meta.ogUrl" />
     <meta property="og:type" :content="meta.ogType" />
 
-    <meta name="twitter:card" :content="meta.twitterCard" />
     <meta name="twitter:title" :content="meta.ogTitle" />
     <meta name="twitter:description" :content="meta.ogDescription" />
     <meta name="twitter:image" :content="meta.ogImage" />
