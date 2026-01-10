@@ -16,7 +16,7 @@ const THEMES = [null, "World", "Arcadeluz", "Gaming"];
 const DEFAULT_OG_IMAGE = `${SITE_BASE}/og-default.jpg`;
 // ======================
 
-const OUT_DIR = path.resolve("public/share");
+const OUT_DIR = path.resolve("dist/share");
 
 const esc = (s) =>
     String(s ?? "")
