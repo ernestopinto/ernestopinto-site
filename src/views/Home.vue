@@ -114,20 +114,33 @@ const getPreviewText = (html: string) => {
   <div class="flex flex-col min-h-screen">
     <!-- Parallax Header -->
     <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <!-- Background -->
       <div
           class="absolute inset-0 bg-cover bg-no-repeat bg-fixed"
           style="
-            background-image: url('https://ik.imagekit.io/v5b1vx0mg/IMG_4801-2.jpg');
-            background-position: center 60%;
-          "
+      background-image: url('https://ik.imagekit.io/v5b1vx0mg/IMG_4801-2.jpg');
+      background-position: center 60%;
+    "
       >
         <div class="absolute inset-0 bg-black/40"></div>
       </div>
 
-      <h1 class="relative text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl px-4 text-center">
-        ernestopinto.net
-      </h1>
+      <!-- Title + Quote -->
+      <div class="relative z-10 flex flex-col items-center text-center px-4">
+        <h1 class="text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter drop-shadow-2xl">
+          ernestopinto.net
+        </h1>
+
+        <p class="mt-4 max-w-3xl text-base sm:text-lg md:text-xl text-white/80 italic tracking-wide drop-shadow-lg">
+          “We are a way for the universe to know itself.”
+        </p>
+
+        <span class="mt-2 text-sm text-white/60">
+          — Carl Sagan
+        </span>
+      </div>
     </header>
+
 
     <!-- Content -->
     <main ref="blogSection" class="max-w-7xl mx-auto px-4 py-12 w-full min-h-[800px]">

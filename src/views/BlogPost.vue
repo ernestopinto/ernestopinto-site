@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, inject, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { lunaService } from '../services/luna.service';
 import type { Subscription } from 'rxjs';
@@ -10,32 +10,62 @@ import { Facebook } from 'lucide-vue-next';
 
 const route = useRoute();
 const router = useRouter();
-const id = route.params.id as string;
+const id = computed(() => route.params.id as string);
 const blogPost = ref<SingleBlogPostDTO | null>(null);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
 let subscription: Subscription;
 
+const meta = inject<any>('meta');
+
+const defaultMeta = {
+  title: 'ernestopinto-site',
+  description: 'We are a way for the universe to know itself.',
+  ogTitle: 'ernestopinto.net',
+  ogDescription: 'We are a way for the universe to know itself.',
+  ogImage: 'https://ik.imagekit.io/v5b1vx0mg/IMG_4801-2.jpg',
+  ogUrl: 'https://ernestopinto.net',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+};
+
 const goBack = () => {
   router.back();
 };
 
-const shareUrl = computed(() => {
-  const baseUrl = window.location.origin;
-  return encodeURIComponent(`${baseUrl}${route.fullPath}`);
-});
-
 const shareOnFacebook = () => {
-  const url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl.value}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
 };
 
-onMounted(() => {
+const updateMeta = (post: SingleBlogPostDTO) => {
+  if (!meta) return;
+  meta.title = `${post.title} | ernestopinto.net`;
+  meta.ogTitle = post.title;
+  // Strip HTML for description
+  const doc = new DOMParser().parseFromString(post.body, 'text/html');
+  const textContent = doc.body.textContent || "";
+  meta.ogDescription = textContent.substring(0, 160) + (textContent.length > 160 ? '...' : '');
+  meta.ogImage = post.header_image || defaultMeta.ogImage;
+  meta.ogUrl = window.location.href;
+  meta.ogType = 'article';
+};
+
+const resetMeta = () => {
+  if (!meta) return;
+  Object.assign(meta, defaultMeta);
+};
+
+const fetchPost = (postId: string) => {
+  if (subscription) {
+    subscription.unsubscribe();
+  }
   isLoading.value = true;
-  subscription = lunaService.getPostById(id).subscribe({
+  subscription = lunaService.getPostById(postId).subscribe({
     next: (response) => {
       if (response.error === 0) {
         blogPost.value = response.data;
+        updateMeta(response.data);
       } else {
         error.value = response.message || 'Failed to load blog post.';
       }
@@ -47,12 +77,23 @@ onMounted(() => {
       isLoading.value = false;
     }
   });
+};
+
+watch(id, (newId) => {
+  if (newId) {
+    fetchPost(newId);
+  }
+});
+
+onMounted(() => {
+  fetchPost(id.value);
 });
 
 onUnmounted(() => {
   if (subscription) {
     subscription.unsubscribe();
   }
+  resetMeta();
 });
 </script>
 
@@ -136,23 +177,20 @@ onUnmounted(() => {
     </div>
     <button
         @click="shareOnFacebook"
-        class="fixed bottom-[20px] right-6 z-50
-         flex items-center justify-center gap-2
-         bg-blue-600 text-white
-         w-12 h-12 sm:w-auto sm:h-auto
-         sm:px-4 sm:py-3
-         rounded-full shadow-lg
-         hover:bg-blue-700 transition-all
-         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        aria-label="Share on Facebook"
+        class="fixed bottom-22 right-6 z-50
+        flex items-center justify-center gap-2
+        bg-blue-600 text-white
+        w-12 h-12 sm:w-auto sm:h-auto
+        sm:px-4 sm:py-3
+        rounded-full shadow-lg
+        hover:bg-blue-700 transition-all
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            aria-label="Share on Facebook"
     >
-      <Facebook class="w-5 h-5" />
+    <Facebook class="w-5 h-5" />
       <span class="hidden sm:inline text-sm font-medium">
         {{ $t('blog.share') }}
       </span>
     </button>
-
-
-
   </div>
 </template>
