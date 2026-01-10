@@ -1,40 +1,26 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { provide, reactive } from 'vue'
+import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
-const { locale } = useI18n()
+const meta = reactive({
+  title: 'ernestopinto-site',
+  description: 'We are a way for the universe to know itself.',
+  ogTitle: 'ernestopinto.net',
+  ogDescription: 'We are a way for the universe to know itself.',
+  ogImage: 'https://ik.imagekit.io/v5b1vx0mg/IMG_4801-2.jpg',
+  ogUrl: 'https://ernestopinto.net',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+})
 
-const toggleLanguage = () => {
-  locale.value = locale.value === 'en' ? 'pt' : 'en'
-}
+provide('meta', meta)
 </script>
 
 <template>
   <div class="min-h-screen">
-    <nav class="flex justify-between items-center p-4 border-b">
-      <div class="flex gap-4">
-        <RouterLink to="/" class="font-medium hover:underline">
-          {{ $t('nav.home') }}
-        </RouterLink>
-        <RouterLink to="/projects" class="font-medium hover:underline">
-          {{ $t('nav.projects') }}
-        </RouterLink>
-        <RouterLink to="/contacts" class="font-medium hover:underline">
-          {{ $t('nav.contacts') }}
-        </RouterLink>
-      </div>
-
-      <button 
-        @click="toggleLanguage" 
-        class="px-3 py-1 text-sm border rounded hover:bg-gray-100 transition-colors cursor-pointer"
-      >
-        {{ locale === 'en' ? 'PT' : 'EN' }}
-      </button>
-    </nav>
-
+    <Header />
     <RouterView />
     <Footer />
   </div>
 </template>
-
-
