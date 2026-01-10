@@ -34,8 +34,13 @@ const goBack = () => {
 };
 
 const shareOnFacebook = () => {
-  const url = encodeURIComponent(window.location.href);
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+  const id = route.params.id; // Vue router
+  const shareUrl = `${window.location.origin}/share/${id}.html`;
+  window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+      "_blank",
+      "noopener,noreferrer"
+  );
 };
 
 const updateMeta = (post: SingleBlogPostDTO) => {
