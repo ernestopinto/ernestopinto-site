@@ -101,13 +101,27 @@ const changePage = (page: number) => {
   }
 };
 
+const decodeHtmlEntities = (input: string) => {
+  if (!input) return '';
+  const el = document.createElement('textarea');
+  el.innerHTML = input;
+  return el.value;
+};
+
 const getPreviewText = (html: string) => {
   if (!html) return '';
-  // Strip HTML tags
-  const text = html.replace(/<[^>]*>?/gm, '');
-  if (text.length <= 100) return text;
-  return text.substring(0, 100).trim() + '...';
+
+  // 1) decode entities like &eacute; -> é
+  const decoded = decodeHtmlEntities(html);
+
+  // 2) strip tags (if any)
+  const text = decoded.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // 3) clip
+  const max = 100;
+  return text.length <= max ? text : text.slice(0, max).trim() + '...';
 };
+
 </script>
 
 <template>
@@ -215,9 +229,9 @@ const getPreviewText = (html: string) => {
               <h2 class="text-xl font-bold mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                 {{ post.title }}
               </h2>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+              <div class="text-gray-600 text-sm mb-4 line-clamp-3">
                 {{ getPreviewText(post.body) }}
-              </p>
+              </div>
               <div class="flex items-center text-sm text-gray-500 mt-4">
                 <span>{{ new Date(post.published_at).toLocaleDateString() }}</span>
               </div>
