@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* ✅ Force Tailwind v4 to scan your templates */
+@source "../index.html";
+@source "../src/**/*.{vue,js,ts,jsx,tsx}";
 
 html, body {
   height: 100%;

@@ -196,8 +196,8 @@ const getPreviewText = (html: string) => {
 
       <div v-else>
         <!-- Blog Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <RouterLink 
+        <div class="grid! grid-cols-1 sm:grid-cols-2! lg:grid!-cols-3 gap-8">
+          <RouterLink
             v-for="post in blogPosts" 
             :key="post.id" 
             :id="'post-' + post.id"
@@ -238,7 +238,7 @@ const getPreviewText = (html: string) => {
             </div>
           </article>
         </RouterLink>
-      </div>
+        </div>
 
         <!-- Pagination -->
         <div v-if="totalPages > 1" class="flex justify-center mt-12 gap-2">
