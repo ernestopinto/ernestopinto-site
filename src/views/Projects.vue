@@ -14,7 +14,7 @@ import {
 } from 'lucide-vue-next'
 
 import { lunaService } from '@/services/luna.service'
-import Tracer from "@ernestopinto/tracer";
+import Tracer from "@pintomiguelernesto/tracer";
 import type { Project, ProjectStatus } from '@/types/projects'
 
 const projects = ref<Project[]>([])
