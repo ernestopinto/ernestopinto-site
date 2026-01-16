@@ -3,6 +3,7 @@ import App from './App.vue'
 import { router } from './router'
 import i18n from './i18n'
 import './style.css'
+import "@pintomiguelernesto/tracer/style.css";
 
 createApp(App)
     .use(router)
