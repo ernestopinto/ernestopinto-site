@@ -14,6 +14,7 @@ import {
 } from 'lucide-vue-next'
 
 import { lunaService } from '@/services/luna.service'
+import Tracer from "@ernestopinto/tracer";
 import type { Project, ProjectStatus } from '@/types/projects'
 
 const projects = ref<Project[]>([])
@@ -89,6 +90,11 @@ onUnmounted(() => subscription?.unsubscribe())
         <p class="text-gray-600 max-w-2xl">
           A curated list of things I’m building, maintaining, or exploring — mostly GitHub-based.
         </p>
+      </div>
+
+      <!-- Tracer row (full width, centered, aligned with the rest) -->
+      <div class="rounded-xl border border-gray-200 bg-white p-4">
+        <Tracer />
       </div>
 
       <!-- Search + Filters -->
