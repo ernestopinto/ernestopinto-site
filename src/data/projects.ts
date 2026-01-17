@@ -2,6 +2,19 @@ import type { Project } from '@/types/projects'
 
 export const PROJECTS: Project[] = [
     {
+        id: 'tracer',
+        name: 'Tracer',
+        description:
+            'Interactive function tracer/plotter built with Vue + Tailwind. Published as an npm package — install with `npm install @ernestopinto/tracer` — and embeddable as a live component.',
+        status: 'active',
+        featured: true,
+        tags: ['personal', 'frontend', 'math', 'npm'],
+        tech: ['Vue', 'Vite', 'TypeScript', 'Tailwind', 'NPM'],
+        githubUrl: 'https://github.com/ernestopinto/tracer',
+        demoUrl: 'https://ernestopinto.net/projects',
+        updatedAt: '2026-01-16',
+    },
+    {
         id: 'korma',
         name: 'Korma',
         description:

@@ -92,11 +92,6 @@ onUnmounted(() => subscription?.unsubscribe())
         </p>
       </div>
 
-      <!-- Tracer row (full width, centered, aligned with the rest) -->
-      <div class="rounded-xl border border-gray-200 bg-white p-4">
-        <Tracer />
-      </div>
-
       <!-- Search + Filters -->
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <!-- Search -->
@@ -152,19 +147,6 @@ onUnmounted(() => subscription?.unsubscribe())
             Maintained
           </button>
 
-          <!--<button
-              @click="filter = 'experiment'"
-              class="px-3 py-1.5 rounded-full border text-sm font-medium
-                   transition cursor-pointer
-                   hover:bg-blue-50 hover:border-blue-300
-                   active:scale-95"
-              :class="filter === 'experiment'
-              ? 'border-blue-600 text-blue-700 bg-blue-50'
-              : 'border-gray-200 text-gray-700'"
-          >
-            Experiments
-          </button>-->
-
           <button
               @click="filter = 'archived'"
               class="px-3 py-1.5 rounded-full border text-sm font-medium
@@ -205,13 +187,14 @@ onUnmounted(() => subscription?.unsubscribe())
           <h2 class="text-xl font-semibold text-gray-900">Featured</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <article
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+            <article
               v-for="p in featured"
               :key="p.id"
-              class="relative rounded-2xl border border-blue-100
-                   bg-blue-50/60 p-6 shadow-sm
-                   hover:bg-white hover:shadow-md transition"
+              :class="[
+              'relative rounded-2xl border border-blue-100 bg-blue-50/60 p-6 shadow-sm hover:bg-white hover:shadow-md transition',
+              p.id === 'tracer' ? 'md:col-span-2' : ''
+            ]"
           >
             <div class="absolute top-5 right-5">
               <span
@@ -285,7 +268,22 @@ onUnmounted(() => subscription?.unsubscribe())
                 </a>
               </div>
             </div>
-          </article>
+
+           <!-- Tracer embedded - COMPACT on mobile -->
+               <div
+                   v-if="p.id === 'tracer'"
+                   class="mt-4 w-full rounded-xl border border-gray-200 bg-white
+                   p-3 md:p-4"
+               >
+               <div
+                 class="w-full max-w-none [&_*]:max-w-none [&_*]:mx-0
+                        max-h-[600px] md:max-h-none overflow-auto"
+                >
+                      <Tracer />
+                </div>
+           </div>
+
+         </article>
         </div>
       </div>
 
@@ -296,14 +294,17 @@ onUnmounted(() => subscription?.unsubscribe())
           <h2 class="text-xl font-semibold text-gray-900">All projects</h2>
         </div>
 
-        <div class="grid grid-cols-1 gap-4">
+        <!-- ✅ 1 col on mobile, 2 cols on md+ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <article
               v-for="p in rest"
               :key="p.id"
-              class="rounded-2xl border border-blue-100
-                   bg-blue-50/60 p-5
-                   hover:bg-white transition"
-          >
+              :class="[
+                'rounded-2xl border border-blue-100 bg-blue-50/60 p-5 hover:bg-white transition',
+                // ✅ make Tracer span full row on md+ so embedded demo looks correct
+                p.id === 'tracer' ? 'md:col-span-2' : ''
+              ]"
+              >
             <div class="flex flex-col md:flex-row md:justify-between gap-3">
               <div>
                 <div class="flex items-center gap-2">
@@ -314,8 +315,8 @@ onUnmounted(() => subscription?.unsubscribe())
                       class="text-xs font-semibold px-2.5 py-1 rounded-full border"
                       :class="statusPill(p.status)"
                   >
-                    {{ p.status }}
-                  </span>
+              {{ p.status }}
+            </span>
                 </div>
 
                 <p class="mt-1 text-gray-600">
@@ -330,8 +331,8 @@ onUnmounted(() => subscription?.unsubscribe())
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-3 py-2 rounded-xl
-                         border border-blue-200 text-sm font-medium
-                         hover:bg-blue-50 transition"
+                   border border-blue-200 text-sm font-medium
+                   hover:bg-blue-50 transition"
                 >
                   <Github class="w-4 h-4" />
                   Repo
@@ -343,19 +344,35 @@ onUnmounted(() => subscription?.unsubscribe())
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-3 py-2 rounded-xl
-                         border border-blue-200 text-sm font-medium
-                         hover:bg-blue-50 transition"
+                   border border-blue-200 text-sm font-medium
+                   hover:bg-blue-50 transition"
                 >
                   <ExternalLink class="w-4 h-4" />
                   Demo
                 </a>
               </div>
             </div>
+
+            <!-- Tracer embedded (All Projects) - compact on mobile -->
+            <div
+                v-if="p.id === 'tracer'"
+                class="mt-4 w-full rounded-xl border border-gray-200 bg-white p-3 md:p-4"
+            >
+              <div
+                  class="w-full max-w-none [&_*]:max-w-none [&_*]:mx-0
+                 max-h-[600px] md:max-h-none overflow-auto"
+              >
+                <Tracer />
+              </div>
+            </div>
           </article>
         </div>
       </div>
+
     </div>
   </div>
 </template>
+
+
 
 
