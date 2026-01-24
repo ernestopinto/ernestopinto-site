@@ -86,6 +86,10 @@ const scrollToBlog = () => {
   }
 };
 
+const scrollToPageTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 const selectTheme = (theme: string | null) => {
   selectedTheme.value = theme;
   currentPage.value = 1;
@@ -97,7 +101,7 @@ const changePage = (page: number) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
     fetchPosts(page, selectedTheme.value);
-    scrollToBlog();
+    scrollToPageTop();
   }
 };
 
