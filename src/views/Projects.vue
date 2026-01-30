@@ -93,7 +93,7 @@ onUnmounted(() => subscription?.unsubscribe())
       </div>
 
       <!-- Search + Filters -->
-      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div class="flex flex-col pt-6 gap-4 md:flex-row md:items-center md:justify-between">
         <!-- Search -->
         <div class="relative w-full md:max-w-md">
           <Search class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
