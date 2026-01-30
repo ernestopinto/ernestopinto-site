@@ -11,8 +11,20 @@ export const PROJECTS: Project[] = [
         tags: ['personal', 'frontend', 'math', 'npm'],
         tech: ['Vue', 'Vite', 'TypeScript', 'Tailwind', 'NPM'],
         githubUrl: 'https://github.com/ernestopinto/tracer',
-        demoUrl: 'https://ernestopinto.net/projects',
         updatedAt: '2026-01-16',
+    },
+    {
+        id: 'clapline',
+        name: 'Clapline',
+        description:
+            'Experimental playground for video-editing tools. Pointer scrubbing on the timeline updates playback time and sets the TCIN marker. Play a single subsection or play all subsections sequentially',
+        status: 'active',
+        featured: true,
+        tags: ['personal', 'frontend', 'math', 'npm'],
+        tech: ['Angular', 'TypeScript', 'Tailwind', 'NPM'],
+        githubUrl: 'https://github.com/ernestopinto/clapline',
+        demoUrl: 'https://ernestopinto.github.io/clapline/',
+        updatedAt: '2026-01-26',
     },
     {
         id: 'korma',
